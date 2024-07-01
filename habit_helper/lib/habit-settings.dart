@@ -2,7 +2,7 @@ import 'dart:js_interop';
 
 import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
- 
+
 extension ColorExtension on String {
   toColor() {
     var hexString = this;
@@ -31,14 +31,13 @@ class _HabitSettingsPageState extends State<HabitSettingsPage> {
   }
 }
 
-
-
 class HabitWidget extends StatefulWidget {
   const HabitWidget({super.key});
 
   @override
   State<HabitWidget> createState() => _HabitWidgetState();
 }
+
 class HabitModel {
   late TextEditingController textController1;
   late FocusNode textFieldFocusNode1;
@@ -78,7 +77,6 @@ class HabitModel {
   }
 }
 
-
 class _HabitWidgetState extends State<HabitWidget> {
   late HabitModel _model;
 
@@ -112,7 +110,6 @@ class _HabitWidgetState extends State<HabitWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
@@ -140,7 +137,7 @@ class _HabitWidgetState extends State<HabitWidget> {
           title: Text(
             'Habit Settings',
             style: TextStyle(
-            color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
           // actions: [
           //   Padding(
@@ -154,7 +151,7 @@ class _HabitWidgetState extends State<HabitWidget> {
           //           print('Text Controller 2 Value: ${_model.textController2.text}');
           //           print('Text Controller 2 Value: ${_model.switchValue}');
           //           print('Text Controller 2 Value: ${_model.textController3.text}');
-  
+
           //           print('Button pressed ...');
           //         },
           //         style: ElevatedButton.styleFrom(
@@ -220,7 +217,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                           color: Color.fromARGB(165, 255, 22, 22),
                           width: 2,
                         ),
-                        borderRadius:  BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -247,8 +244,8 @@ class _HabitWidgetState extends State<HabitWidget> {
                       const Text(
                         'Notifications',
                         style: TextStyle(
-                              letterSpacing: 0,
-                              color: Colors.white,
+                          letterSpacing: 0,
+                          color: Colors.white,
                         ),
                       ),
                       Switch(
@@ -257,12 +254,9 @@ class _HabitWidgetState extends State<HabitWidget> {
                           setState(() => _model.switchValue = newValue!);
                         },
                         activeColor: '#FFFFFF'.toColor(),
-                        activeTrackColor:
-                            '#8B97A2'.toColor(),
-                        inactiveTrackColor:
-                            '#1A1F24'.toColor(),
-                        inactiveThumbColor:
-                            '#8B97A2'.toColor(),
+                        activeTrackColor: '#8B97A2'.toColor(),
+                        inactiveTrackColor: '#1A1F24'.toColor(),
+                        inactiveThumbColor: '#8B97A2'.toColor(),
                       ),
                     ],
                   ),
@@ -313,7 +307,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                     style: TextStyle(
                       letterSpacing: 0,
                       color: Colors.white,
-                      ),
+                    ),
                     // validator:
                   ),
                 ),
@@ -510,8 +504,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                 //           ),
                 //         ]
                 //       ),
-                    
-                    
+
                 //     ],
                 //   ),
                 // ),
@@ -550,11 +543,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
                       child: ElevatedButton(
-                        onPressed: () {
-                          habits_screen.habitsList.add(Habit(
-                            
-                          ))
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
                           padding: EdgeInsets.zero,
