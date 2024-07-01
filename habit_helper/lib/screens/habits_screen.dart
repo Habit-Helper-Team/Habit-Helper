@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:habit_helper/habit-settings.dart';
 //import 'package:percent_indicator/percent_indicator.dart';
 
 class Habit {
@@ -32,7 +33,9 @@ class Habits extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Habits'),
+        title: const Text('Habit Helper'),
+        titleTextStyle: TextStyle(
+            color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {},
@@ -40,9 +43,9 @@ class Habits extends ConsumerWidget {
         ),
       ),
       body: Container(
-          color: Colors.grey[500],
-          padding:
-              const EdgeInsetsDirectional.symmetric(horizontal: 0, vertical: 0),
+          color: Color(0xFF1A1F24),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 16, vertical: 0),
           child: ListView.builder(
             itemCount: habitsList.length,
             itemBuilder: (BuildContext context, int index) {
@@ -66,10 +69,11 @@ class Habits extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Row(
+                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: 300,
+                                width: 270,
                                 child: TextButton(
                                   onPressed: () {
                                     /*
@@ -86,9 +90,10 @@ class Habits extends ConsumerWidget {
                                         fontWeight: !habit.isComplete()
                                             ? FontWeight.normal
                                             : FontWeight.bold,
-                                        fontSize: 30,
+                                        fontSize: 24,
                                         color: !habit.isComplete()
-                                            ? Colors.purpleAccent[100]
+                                            ? const Color.fromARGB(
+                                                255, 255, 255, 255)
                                             : Colors.grey[800],
                                       ),
                                     ),
@@ -99,7 +104,9 @@ class Habits extends ConsumerWidget {
                                   iconSize: 40,
                                   onPressed: () {
                                     if (!habit.isComplete()) {
-                                      habit.addProgress();
+                                      // setState(() {
+                                      //   habit.addProgress();
+                                      // });
                                     } else {
                                       return;
                                     }
@@ -131,8 +138,15 @@ class Habits extends ConsumerWidget {
           )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        onPressed: () {},
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HabitSettingsPage()),
+          );
+        },
         child: const Icon(Icons.add),
+        shape: CircleBorder(),
       ),
     );
   }
