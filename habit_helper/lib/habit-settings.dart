@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:habit_helper/screens/habits_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
  
 extension ColorExtension on String {
   toColor() {
@@ -107,7 +110,29 @@ class _HabitWidgetState extends State<HabitWidget> {
 
     super.dispose();
   }
-
+  Future addHabit(Habit t) async {
+    String stringHabit = await fetchData();
+    final habitList = jsonDecode(stringHabit);
+    List habits = [];
+    for (var todo in habitList) {
+      setState(() {
+        habits.add(Habit().fromJson(todo));
+      });
+    }
+    setState(() {
+      habits.add(t);
+    });
+    saveHabit(habits);
+  }
+  void saveHabit(List habits) async {
+    SharedPreferences prefs1 = await SharedPreferences.getInstance();
+    List items = habits.map((e) => e.toJson()).toList();
+    await prefs1.setString('habits', jsonEncode(items));
+  }
+  Future fetchData() async {
+    final prefs1 = await SharedPreferences.getInstance();
+    return prefs1.getString('habits') ?? '';
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -560,13 +585,11 @@ class _HabitWidgetState extends State<HabitWidget> {
                           String name = _model.textController1.text;
                           String time = _model.textController2.text;
                           int days = int.tryParse(_model.textController3.text) ?? 0;
-                          // _model.save(name, time, days);
-                          Navigator.pop(context);
-
-                          print('Text Controller 1 Value: ${_model.textController1.text}');
-                          print('Text Controller 2 Value: ${_model.textController2.text}');
-                          print('Text Controller 2 Value: ${_model.switchValue}');
-                          print('Text Controller 2 Value: ${_model.textController3.text}');
+                          Habit new_habit = Habit(title: name, target: days);
+                          addHabit(new_habit);
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            Navigator.pushReplacementNamed(context, '/');
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),

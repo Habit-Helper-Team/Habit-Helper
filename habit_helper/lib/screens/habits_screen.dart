@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_helper/habit-settings.dart';
+import 'package:habit_helper/storage.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'dart:convert';
 import 'dart:math';
@@ -15,7 +17,7 @@ class Habits extends StatefulWidget {
 
 class Habit {
   String title = "";
-  double progress = 0;
+  int progress = 0;
   int target = 0;
   Habit({this.title = "", this.target = 0, this.progress = 0});
   void addProgress() {
@@ -48,7 +50,7 @@ class _HabitsState extends State<Habits> {
   @override
   void initState() {
     super.initState();
-    // setupHabit();
+    setupHabit();
     habitsList.addAll([
       Habit(title: 'Something', target: 1),
       Habit(title: 'Anything 2', target: 2),
@@ -58,10 +60,9 @@ class _HabitsState extends State<Habits> {
 
   late SharedPreferences prefs;
   List habits = [];
-  setupHabit() async {
-    prefs = await SharedPreferences.getInstance();
-    String? stringHabit = await prefs.getString('habits');
-    List habitList = jsonDecode(stringHabit ?? '');
+  Future setupHabit() async {
+    String stringHabit = await fetchData();
+    final habitList = jsonDecode(stringHabit);
     for (var todo in habitList) {
       setState(() {
         habits.add(Habit().fromJson(todo));
@@ -69,13 +70,19 @@ class _HabitsState extends State<Habits> {
     }
   }
 
-  void saveHabit() {
+  void saveHabit() async {
+    SharedPreferences prefs1 = await SharedPreferences.getInstance();
     List items = habits.map((e) => e.toJson()).toList();
-    prefs.setString('habits', jsonEncode(items));
+    await prefs1.setString('habits', jsonEncode(items));
   }
 
-  void addHabit() async {
-    Habit t = Habit(title: '', target: 0, progress: 0);
+  Future fetchData() async {
+    final prefs1 = await SharedPreferences.getInstance();
+    return prefs1.getString('habits') ?? '';
+  }
+
+  addHabit({String title = 'SLEEEP', int target = 1, int progress = 0}) async {
+    Habit t = Habit(title: title, target: target, progress: progress);
     setState(() {
       habits.add(t);
     });
@@ -98,9 +105,9 @@ class _HabitsState extends State<Habits> {
           padding: const EdgeInsetsDirectional.symmetric(
               horizontal: 16, vertical: 0),
           child: ListView.builder(
-            itemCount: habitsList.length,
+            itemCount: habits.length,
             itemBuilder: (BuildContext context, int index) {
-              var habit = habitsList[index];
+              var habit = habits[index];
               return Column(children: [
                 const SizedBox(
                   height: 12,
@@ -134,7 +141,9 @@ class _HabitsState extends State<Habits> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      habit.title,
+                                      habit.title +
+                                          ' - ' +
+                                          habits.length.toString(),
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: !habit.isComplete()
@@ -156,7 +165,12 @@ class _HabitsState extends State<Habits> {
                                       setState(() {
                                         habit.addProgress();
                                       });
+                                      saveHabit();
                                     } else {
+                                      setState(() {
+                                        habits.remove(habit);
+                                      });
+                                      saveHabit();
                                       return;
                                     }
                                   },
@@ -171,6 +185,7 @@ class _HabitsState extends State<Habits> {
                             ]),
                         SizedBox(
                           width: 500,
+                          height: 10,
                           child: LinearProgressIndicator(
                             value: habit.progress / habit.target,
                             backgroundColor: Colors.grey[700],
@@ -189,6 +204,7 @@ class _HabitsState extends State<Habits> {
         backgroundColor: const Color(0xFF02B732),
         foregroundColor: Colors.white,
         onPressed: () {
+          // addHabit();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const HabitSettingsPage()),
