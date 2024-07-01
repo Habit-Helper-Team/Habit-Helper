@@ -1,14 +1,5 @@
-// import '/flutter_flow/flutter_flow_icon_button.dart';
-// import '/flutter_flow/flutter_flow_theme.dart';
-// import '/flutter_flow/flutter_flow_util.dart';
-// import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:provider/provider.dart';
-
-// import 'habit_model.dart';
-// export 'habit_model.dart';
  
 extension ColorExtension on String {
   toColor() {
@@ -37,15 +28,6 @@ class _HabitSettingsPageState extends State<HabitSettingsPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -146,7 +128,10 @@ class _HabitWidgetState extends State<HabitWidget> {
               size: 30,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Habits()),
+              );
             },
           ),
           title: Text(
@@ -156,35 +141,40 @@ class _HabitWidgetState extends State<HabitWidget> {
               letterSpacing: 0,
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
-              child: SizedBox(
-                width: 70,
-                height: 32,
-                child: ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    elevation: 0,
-                    backgroundColor: const Color(0xFF02B732),
-                  ),
-                  child: const Text(
-                    'Save',
-                    style: TextStyle(
-                      letterSpacing: 0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 16, 8),
+          //     child: SizedBox(
+          //       width: 70,
+          //       height: 32,
+          //       child: ElevatedButton(
+          //         onPressed: () {
+          //           print('Text Controller 1 Value: ${_model.textController1.text}');
+          //           print('Text Controller 2 Value: ${_model.textController2.text}');
+          //           print('Text Controller 2 Value: ${_model.switchValue}');
+          //           print('Text Controller 2 Value: ${_model.textController3.text}');
+  
+          //           print('Button pressed ...');
+          //         },
+          //         style: ElevatedButton.styleFrom(
+          //           padding: EdgeInsets.zero,
+          //           shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(4),
+          //           ),
+          //           elevation: 0,
+          //           backgroundColor: const Color(0xFF02B732),
+          //         ),
+          //         child: const Text(
+          //           'Save',
+          //           style: TextStyle(
+          //             letterSpacing: 0,
+          //             color: Colors.white,
+          //           ),
+          //         ),
+          //       ),
+          //     )
+          //   ),
+          // ],
           centerTitle: false,
           elevation: 0,
         ),
@@ -378,151 +368,182 @@ class _HabitWidgetState extends State<HabitWidget> {
                     //     _model.textController3Validator.asValidator(context),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Days',
-                        style: TextStyle(letterSpacing: 0,
-                            color: Colors.white),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Mon',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Tue',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Wed',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Thu',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Fri',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Sat',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                letterSpacing: 0,
-                                color: '#262D34'.toColor(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: '#B2FF5B'.toColor(),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Sun',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: '#262D34'.toColor(),
-                                letterSpacing: 0,
-                              )
-                            ),
-                          ),
-                        ]
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.max,
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'Days',
+                //         style: TextStyle(letterSpacing: 0,
+                //             color: Colors.white),
+                //       ),
+                //       Row(
+                //         mainAxisSize: MainAxisSize.max,
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Mon',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Tue',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Wed',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Thu',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Fri',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Sat',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 letterSpacing: 0,
+                //                 color: '#262D34'.toColor(),
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 4),
+                //           Container(
+                //             width: 40,
+                //             height: 40,
+                //             decoration: BoxDecoration(
+                //               color: '#B2FF5B'.toColor(),
+                //               borderRadius: BorderRadius.circular(8),
+                //             ),
+                //             alignment: AlignmentDirectional(0, 0),
+                //             child: Text(
+                //               'Sun',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: '#262D34'.toColor(),
+                //                 letterSpacing: 0,
+                //               )
+                //             ),
+                //           ),
+                //         ]
+                //       ),
+                    
+                    
+                //     ],
+                //   ),
+                // ),
+                // Expanded(
+                //   child: Align(
+                //     alignment: AlignmentDirectional(0, 1),
+                //     child: Padding(
+                //       padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
+                //       child: ElevatedButton(
+                //         onPressed: () {
+                //           print('Button pressed ...');
+                //         },
+                //         style: ElevatedButton.styleFrom(
+                //           minimumSize: const Size(double.infinity, 50),
+                //           padding: EdgeInsets.zero,
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //           elevation: 2,
+                //           backgroundColor: Color(0xFFFF0000),
+                //           foregroundColor: Colors.white,
+                //           textStyle: const TextStyle(
+                //             letterSpacing: 0,
+                //           ),
+                //         ),
+                //         child: const Text(
+                //           'Delete',
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                   child: Align(
                     alignment: AlignmentDirectional(0, 1),
@@ -530,7 +551,10 @@ class _HabitWidgetState extends State<HabitWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
                       child: ElevatedButton(
                         onPressed: () {
-                          print('Button pressed ...');
+                          print('Text Controller 1 Value: ${_model.textController1.text}');
+                          print('Text Controller 2 Value: ${_model.textController2.text}');
+                          print('Text Controller 2 Value: ${_model.switchValue}');
+                          print('Text Controller 2 Value: ${_model.textController3.text}');
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
@@ -539,14 +563,15 @@ class _HabitWidgetState extends State<HabitWidget> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 2,
-                          backgroundColor: Color(0xFFFF0000),
+                          backgroundColor: const Color(0xFF02B732),
                           foregroundColor: Colors.white,
                           textStyle: const TextStyle(
                             letterSpacing: 0,
+                            fontSize: 24,
                           ),
                         ),
                         child: const Text(
-                          'Delete',
+                          'Save',
                         ),
                       ),
                     ),
