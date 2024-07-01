@@ -43,10 +43,6 @@ class _HabitsState extends State<Habits> {
             color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         backgroundColor: const Color.fromARGB(255, 67, 67, 67),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.close, color: Colors.white),
-        ),
       ),
       body: Container(
           color: Color(0xFF1A1F24),

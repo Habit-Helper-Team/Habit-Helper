@@ -118,6 +118,7 @@ class _HabitWidgetState extends State<HabitWidget> {
         key: scaffoldKey,
         backgroundColor: '#1A1F24'.toColor(),
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: '#1A1F24'.toColor(),
           automaticallyImplyLeading: false,
           leading: IconButton(
@@ -175,7 +176,6 @@ class _HabitWidgetState extends State<HabitWidget> {
           //     )
           //   ),
           // ],
-          centerTitle: false,
           elevation: 0,
         ),
         body: SafeArea(
