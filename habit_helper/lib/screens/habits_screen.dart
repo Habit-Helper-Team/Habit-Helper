@@ -2,6 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_helper/habit-settings.dart';
 
+import 'dart:convert';
+import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
+
 //import 'package:percent_indicator/percent_indicator.dart';
 class Habits extends StatefulWidget {
   const Habits({super.key});
@@ -13,13 +17,28 @@ class Habit {
   String title = "";
   double progress = 0;
   int target = 0;
-  Habit(this.title, this.target);
+  Habit({this.title = "", this.target = 0, this.progress = 0});
   void addProgress() {
     progress += 1;
   }
 
   bool isComplete() {
     return progress >= target;
+  }
+
+  toJson() {
+    return {
+      "title": title,
+      "progress": progress,
+      "target": target,
+    };
+  }
+
+  fromJson(jsonData) {
+    return Habit(
+        title: jsonData['title'],
+        progress: jsonData['progress'],
+        target: jsonData['target']);
   }
 }
 
@@ -29,8 +48,38 @@ class _HabitsState extends State<Habits> {
   @override
   void initState() {
     super.initState();
-    habitsList.addAll(
-        [Habit('Something', 1), Habit('Anything 2', 2), Habit('5 clicks', 5)]);
+    // setupHabit();
+    habitsList.addAll([
+      Habit(title: 'Something', target: 1),
+      Habit(title: 'Anything 2', target: 2),
+      Habit(title: '5 clicks', target: 5)
+    ]);
+  }
+
+  late SharedPreferences prefs;
+  List habits = [];
+  setupHabit() async {
+    prefs = await SharedPreferences.getInstance();
+    String? stringHabit = await prefs.getString('habits');
+    List habitList = jsonDecode(stringHabit ?? '');
+    for (var todo in habitList) {
+      setState(() {
+        habits.add(Habit().fromJson(todo));
+      });
+    }
+  }
+
+  void saveHabit() {
+    List items = habits.map((e) => e.toJson()).toList();
+    prefs.setString('habits', jsonEncode(items));
+  }
+
+  void addHabit() async {
+    Habit t = Habit(title: '', target: 0, progress: 0);
+    setState(() {
+      habits.add(t);
+    });
+    saveHabit();
   }
 
   @override
@@ -137,7 +186,7 @@ class _HabitsState extends State<Habits> {
             },
           )),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF02B732),
         foregroundColor: Colors.white,
         onPressed: () {
           Navigator.push(

@@ -1,5 +1,6 @@
 import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
+
  
 extension ColorExtension on String {
   toColor() {
@@ -549,6 +550,19 @@ class _HabitWidgetState extends State<HabitWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
                       child: ElevatedButton(
                         onPressed: () {
+                          if (_model.textController1.text.isEmpty ||
+                              _model.textController2.text.isEmpty ||
+                              !RegExp(r'^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')
+                                  .hasMatch(_model.textController2.text) ||
+                              int.tryParse(_model.textController3.text) == null) {
+                            return;
+                          }
+                          String name = _model.textController1.text;
+                          String time = _model.textController2.text;
+                          int days = int.tryParse(_model.textController3.text) ?? 0;
+                          // _model.save(name, time, days);
+                          Navigator.pop(context);
+
                           print('Text Controller 1 Value: ${_model.textController1.text}');
                           print('Text Controller 2 Value: ${_model.textController2.text}');
                           print('Text Controller 2 Value: ${_model.switchValue}');
