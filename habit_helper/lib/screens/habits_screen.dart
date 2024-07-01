@@ -1,7 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_helper/habit-settings.dart';
+
 //import 'package:percent_indicator/percent_indicator.dart';
+class Habits extends StatefulWidget {
+  const Habits({super.key});
+  @override
+  State<Habits> createState() => _HabitsState();
+}
 
 class Habit {
   String title = "";
@@ -17,25 +23,22 @@ class Habit {
   }
 }
 
-class Habits extends ConsumerWidget {
-  Habits({super.key});
-
+class _HabitsState extends State<Habits> {
   List<Habit> habitsList = [];
 
   @override
   void initState() {
+    super.initState();
     habitsList.addAll(
         [Habit('Something', 1), Habit('Anything 2', 2), Habit('5 clicks', 5)]);
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Habit Helper'),
-        titleTextStyle: TextStyle(
-            color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+        title: const Text('Habits'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {},
@@ -43,7 +46,7 @@ class Habits extends ConsumerWidget {
         ),
       ),
       body: Container(
-          color: Color(0xFF1A1F24),
+          color: Colors.grey[500],
           padding: const EdgeInsetsDirectional.symmetric(
               horizontal: 16, vertical: 0),
           child: ListView.builder(
@@ -69,11 +72,10 @@ class Habits extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Row(
-                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: 270,
+                                width: 300,
                                 child: TextButton(
                                   onPressed: () {
                                     /*
@@ -90,10 +92,9 @@ class Habits extends ConsumerWidget {
                                         fontWeight: !habit.isComplete()
                                             ? FontWeight.normal
                                             : FontWeight.bold,
-                                        fontSize: 24,
+                                        fontSize: 30,
                                         color: !habit.isComplete()
-                                            ? const Color.fromARGB(
-                                                255, 255, 255, 255)
+                                            ? Colors.purpleAccent[100]
                                             : Colors.grey[800],
                                       ),
                                     ),
@@ -104,9 +105,9 @@ class Habits extends ConsumerWidget {
                                   iconSize: 40,
                                   onPressed: () {
                                     if (!habit.isComplete()) {
-                                      // setState(() {
-                                      //   habit.addProgress();
-                                      // });
+                                      setState(() {
+                                        habit.addProgress();
+                                      });
                                     } else {
                                       return;
                                     }
@@ -142,11 +143,10 @@ class Habits extends ConsumerWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HabitSettingsPage()),
+            MaterialPageRoute(builder: (context) => const HabitSettingsPage()),
           );
         },
         child: const Icon(Icons.add),
-        shape: CircleBorder(),
       ),
     );
   }
