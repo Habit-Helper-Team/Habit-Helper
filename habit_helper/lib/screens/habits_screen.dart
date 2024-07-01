@@ -38,7 +38,10 @@ class _HabitsState extends State<Habits> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Habits'),
+        title: const Text('Habit Helper'),
+        titleTextStyle: TextStyle(
+            color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        backgroundColor: const Color.fromARGB(255, 67, 67, 67),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {},
@@ -46,7 +49,7 @@ class _HabitsState extends State<Habits> {
         ),
       ),
       body: Container(
-          color: Colors.grey[500],
+          color: Color(0xFF1A1F24),
           padding: const EdgeInsetsDirectional.symmetric(
               horizontal: 16, vertical: 0),
           child: ListView.builder(
@@ -75,7 +78,7 @@ class _HabitsState extends State<Habits> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: 300,
+                                width: 270,
                                 child: TextButton(
                                   onPressed: () {
                                     /*
@@ -146,6 +149,7 @@ class _HabitsState extends State<Habits> {
             MaterialPageRoute(builder: (context) => const HabitSettingsPage()),
           );
         },
+        shape: CircleBorder(),
         child: const Icon(Icons.add),
       ),
     );
