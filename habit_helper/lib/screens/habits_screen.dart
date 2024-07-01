@@ -1,15 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 //import 'package:percent_indicator/percent_indicator.dart';
-
-class Habits extends StatefulWidget {
-  const Habits({super.key});
-
-  @override
-  State<Habits> createState() => _HabitsState();
-}
 
 class Habit {
   String title = "";
@@ -25,18 +16,19 @@ class Habit {
   }
 }
 
-class _HabitsState extends State<Habits> {
+class Habits extends ConsumerWidget {
+  Habits({super.key});
+
   List<Habit> habitsList = [];
 
   @override
   void initState() {
-    super.initState();
     habitsList.addAll(
         [Habit('Something', 1), Habit('Anything 2', 2), Habit('5 clicks', 5)]);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -44,9 +36,8 @@ class _HabitsState extends State<Habits> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.close, color: Colors.white),
+          icon: const Icon(Icons.close, color: Colors.white),
         ),
-        actions: [SizedBox()],
       ),
       body: Container(
           color: Colors.grey[500],
@@ -108,9 +99,7 @@ class _HabitsState extends State<Habits> {
                                   iconSize: 40,
                                   onPressed: () {
                                     if (!habit.isComplete()) {
-                                      setState(() {
-                                        habit.addProgress();
-                                      });
+                                      habit.addProgress();
                                     } else {
                                       return;
                                     }
