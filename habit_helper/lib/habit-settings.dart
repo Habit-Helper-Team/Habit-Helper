@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
  
@@ -549,10 +551,9 @@ class _HabitWidgetState extends State<HabitWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
                       child: ElevatedButton(
                         onPressed: () {
-                          print('Text Controller 1 Value: ${_model.textController1.text}');
-                          print('Text Controller 2 Value: ${_model.textController2.text}');
-                          print('Text Controller 2 Value: ${_model.switchValue}');
-                          print('Text Controller 2 Value: ${_model.textController3.text}');
+                          habits_screen.habitsList.add(Habit(
+                            
+                          ))
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),

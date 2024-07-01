@@ -3,38 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:habit_helper/habit-settings.dart';
 
 //import 'package:percent_indicator/percent_indicator.dart';
-class Habits extends StatefulWidget {
-  const Habits({super.key});
-  @override
-  State<Habits> createState() => _HabitsState();
-}
+class Habits extends ConsumerWidget {
+  Habits({super.key});
 
-class Habit {
-  String title = "";
-  double progress = 0;
-  int target = 0;
-  Habit(this.title, this.target);
-  void addProgress() {
-    progress += 1;
-  }
-
-  bool isComplete() {
-    return progress >= target;
-  }
-}
-
-class _HabitsState extends State<Habits> {
-  List<Habit> habitsList = [];
+  final habitsProvider = StateProvider<List<Habit>>((ref) => []);
 
   @override
-  void initState() {
-    super.initState();
-    habitsList.addAll(
-        [Habit('Something', 1), Habit('Anything 2', 2), Habit('5 clicks', 5)]);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<Habit> habitsList = ref.watch(habitsProvider);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -104,11 +80,15 @@ class _HabitsState extends State<Habits> {
                                   iconSize: 40,
                                   onPressed: () {
                                     if (!habit.isComplete()) {
-                                      setState(() {
-                                        habit.addProgress();
-                                      });
+                                      ref
+                                              .read(habitsProvider.notifier)
+                                              .state[index] =
+                                          Habit(habit.title, habit.target,
+                                              habit.progress + 1);
                                     } else {
-                                      return;
+                                      ref
+                                          .read(habitsProvider.notifier)
+                                          .state[index];
                                     }
                                   },
                                   icon: Icon(
@@ -149,5 +129,19 @@ class _HabitsState extends State<Habits> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+}
+
+class Habit {
+  String title = "";
+  double progress = 0;
+  int target = 0;
+  Habit(this.title, this.target, this.progress);
+  void addProgress() {
+    progress += 1;
+  }
+
+  bool isComplete() {
+    return progress >= target;
   }
 }

@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:habit_helper/screens/habits_screen.dart';
-import 'package:habit_helper/screens/home_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() => runApp(MaterialApp(
+void main() {
+  runApp(const ProviderScope(child: HabitsHelperApp()));
+}
+
+class HabitsHelperApp extends StatelessWidget {
+  const HabitsHelperApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Habit Helper',
       theme: ThemeData(
-        primaryColor: Colors.black45,
+        primarySwatch: Colors.blue,
       ),
       home: Habits(),
-      debugShowCheckedModeBanner: false,
-    ));
+    );
+  }
+}

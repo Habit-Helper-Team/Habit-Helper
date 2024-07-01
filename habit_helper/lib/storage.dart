@@ -1,17 +1,22 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
-  static const _waterIntakeKey = 'habitsKey';
-  Future<void> saveWaterIntake(double intake) async {
+  static const _habitsKey = 'habitsKey';
+  /*Future<void> saveHabits(List<Habit> someList) async {
     final prefs = await SharedPreferences.getInstance();
-    // TODO - Save the water intake into prefs
-    prefs.setDouble(_waterIntakeKey, intake);
+    prefs.setIntList(_habitsKey, someList.map((e) => e.title).toList());
   }
 
-  Future<double> getWaterIntake() async {
+  Future<double> getHabits() async {
     final prefs = await SharedPreferences.getInstance();
-    // TODO - Get the water intake from prefs, remove 'return 0.0'
-    return 0.0;
-    return prefs.getDouble(_waterIntakeKey) ?? 0.0;
+    return prefs.getStringList(_habitsKey);
   }
+  */
+}
+
+class Habit {
+  String title = "";
+  double progress = 0;
+  int target = 0;
+  Habit(this.title, this.target);
 }
