@@ -91,9 +91,9 @@ class _HabitsState extends State<Habits> {
                                         fontWeight: !habit.isComplete()
                                             ? FontWeight.normal
                                             : FontWeight.bold,
-                                        fontSize: 30,
+                                        fontSize: 24,
                                         color: !habit.isComplete()
-                                            ? Colors.purpleAccent[100]
+                                            ? Colors.white
                                             : Colors.grey[800],
                                       ),
                                     ),

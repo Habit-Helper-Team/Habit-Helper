@@ -7,4 +7,5 @@ void main() => runApp(MaterialApp(
         primaryColor: Colors.black45,
       ),
       home: Habits(),
+      debugShowCheckedModeBanner: false,
     ));

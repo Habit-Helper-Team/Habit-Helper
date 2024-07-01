@@ -138,9 +138,7 @@ class _HabitWidgetState extends State<HabitWidget> {
           title: Text(
             'Habit Settings',
             style: TextStyle(
-              color: '#FFFFFF'.toColor(),
-              letterSpacing: 0,
-            ),
+            color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
           // actions: [
           //   Padding(
