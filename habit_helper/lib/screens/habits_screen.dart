@@ -78,7 +78,7 @@ class _HabitsState extends State<Habits> {
 
   Future fetchData() async {
     final prefs1 = await SharedPreferences.getInstance();
-    return prefs1.getString('habits') ?? '';
+    return prefs1.getString('habits') ?? '[]';
   }
 
   addHabit({String title = 'SLEEEP', int target = 1, int progress = 0}) async {
@@ -141,9 +141,7 @@ class _HabitsState extends State<Habits> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      habit.title +
-                                          ' - ' +
-                                          habits.length.toString(),
+                                      habit.title,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: !habit.isComplete()

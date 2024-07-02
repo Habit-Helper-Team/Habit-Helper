@@ -131,7 +131,7 @@ class _HabitWidgetState extends State<HabitWidget> {
   }
   Future fetchData() async {
     final prefs1 = await SharedPreferences.getInstance();
-    return prefs1.getString('habits') ?? '';
+    return prefs1.getString('habits') ?? '[]';
   }
   @override
   Widget build(BuildContext context) {
