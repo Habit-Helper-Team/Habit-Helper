@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:habit_helper/screens/habits_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
  
 extension ColorExtension on String {

@@ -1,13 +1,13 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:habit_helper/Notificationservice.dart';
 import 'package:habit_helper/habit-settings.dart';
-import 'package:habit_helper/storage.dart';
-import 'package:localstorage/localstorage.dart';
 
 import 'dart:convert';
-import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 //import 'package:percent_indicator/percent_indicator.dart';
 class Habits extends StatefulWidget {
   const Habits({super.key});
@@ -45,17 +45,62 @@ class Habit {
 }
 
 class _HabitsState extends State<Habits> {
-  List<Habit> habitsList = [];
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//       FlutterLocalNotificationsPlugin();
+//   @override
+//   void initState() {
+//     super.initState();
+//     // Initialize the notification plugin
+//     const AndroidInitializationSettings initializationSettingsAndroid =
+//         AndroidInitializationSettings('app_icon');
+//     final InitializationSettings initializationSettings =
+//         InitializationSettings(
+//       android: initializationSettingsAndroid,
+//     );
+//     flutterLocalNotificationsPlugin.initialize(initializationSettings);
+//     // Schedule the daily notification
+//     _scheduleDailyNotification();
+//   }
+//   Future<void> _scheduleDailyNotification() async {
+//     // Get the next instance of 10:00 AM
+//     tz.TZDateTime scheduledDate = _nextInstanceOfTenAM();
+//     // Define the notification details
+//     const AndroidNotificationDetails androidPlatformChannelSpecifics =
+//         AndroidNotificationDetails(
+//       'daily notification channel id',
+//       'daily notification channel name',
+//       // 'daily notification description',
+//       importance: Importance.max,
+//       priority: Priority.high,
+//     );
+//     const NotificationDetails platformChannelSpecifics =
+//         NotificationDetails(android: androidPlatformChannelSpecifics);
+//     // Schedule the notification
+//     await flutterLocalNotificationsPlugin.zonedSchedule(
+//       0,
+//       'Title',
+//       'Body',
+//       scheduledDate,
+//       platformChannelSpecifics,
+//       androidAllowWhileIdle: true,
+//       uiLocalNotificationDateInterpretation:
+//           UILocalNotificationDateInterpretation.absoluteTime,
+//     );
+//   }
+//   tz.TZDateTime _nextInstanceOfTenAM() {
+//     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+//     tz.TZDateTime scheduledDate =
+//         tz.TZDateTime(tz.local, now.year, now.month, now.day, 22, 0); // later
+//     if (scheduledDate.isBefore(now)) {
+//       scheduledDate = scheduledDate.add(const Duration(days: 1));
+//     }
+//     return scheduledDate;
+//   }
 
   @override
   void initState() {
     super.initState();
     setupHabit();
-    habitsList.addAll([
-      Habit(title: 'Something', target: 1),
-      Habit(title: 'Anything 2', target: 2),
-      Habit(title: '5 clicks', target: 5)
-    ]);
   }
 
   late SharedPreferences prefs;
